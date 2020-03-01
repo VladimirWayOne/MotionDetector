@@ -2,12 +2,12 @@ import functions as fn
 import cv2
 import imutils
 
-capture = cv2.VideoCapture(0)
+capture = cv2.VideoCapture(0)   # capture video from webcam
 frame_cut = None
 first_frame = None
-bg_frames = []
-bg_frames_count = 6
-frame_num = True
+bg_frames = []          # last frames buffer 
+bg_frames_count = 6     # maximum frames in buffer
+frame_num = True        # this is used to skip frames
 while True:
     if frame_num is False:
         frame_num = True
@@ -53,7 +53,6 @@ while True:
         cv2.rectangle(output_frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
     cv2.imshow('detector', output_frame)
-    cv2.imshow('diff', frame_diff)
     if frame_cut is not None:
         cv2.imshow('cut', frame_cut)
     if cv2.waitKey(1) & 0xFF == ord('q'):
